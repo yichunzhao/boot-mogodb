@@ -52,6 +52,11 @@ public class BootMongodbApplication {
 
             log.info("inserting student" + student.toString());
             repository.insert(student);
+
+            log.info("+++looking for a student by his firstname");
+            List<Student> foundList = repository.findStudentByFirstName("Yichun");
+            log.info("--- foundList" + foundList.toString());
+
         };
     }
 
