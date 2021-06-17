@@ -47,16 +47,15 @@ public class BootMongodbApplication {
             List<Student> students = mongoTemplate.find(query, Student.class);
 
             if (students.size() >= 1) {
-                throw new IllegalStateException("The email has been used");
+                log.error("The email has been used");
+            } else {
+                log.info("inserting student" + student.toString());
+                repository.insert(student);
+
+                log.info("+++looking for a student by his firstname");
+                List<Student> foundList = repository.findStudentByFirstName("Yichun");
+                log.info("--- foundList" + foundList.toString());
             }
-
-            log.info("inserting student" + student.toString());
-            repository.insert(student);
-
-            log.info("+++looking for a student by his firstname");
-            List<Student> foundList = repository.findStudentByFirstName("Yichun");
-            log.info("--- foundList" + foundList.toString());
-
         };
     }
 
